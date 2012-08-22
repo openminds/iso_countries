@@ -6,6 +6,11 @@ module ActionView #:nodoc:
         InstanceTag.new(object, method, self, options.delete(:object)).to_country_select_tag(priority_countries, options, html_options)
       end
 
+      # Returns select and option tags with a given name, using iso_options_for_select to generate the list of option tags. For use without FormBuilder object.
+      def country_select_tag(name, priority_countries = nil, selected_value = nil, options = {}, html_options = {})
+        select_tag name.to_sym, iso_options_for_select(selected_value, priority_countries), html_options.stringify_keys
+      end
+
       # Returns a string of option tags for pretty much any country in the world. Supply a country name as selected to have it marked as the selected option tag. You can also supply an array of countries as priority_countries, so that they will be listed above the rest of the (long) list.
       #
       # NOTE: Only the option tags are returned, you have to wrap this call in a regular HTML select tag.
